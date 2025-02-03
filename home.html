@@ -1,0 +1,344 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECO CLEAN</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'lotus.png' %}" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .navbar-brand h1 {
+            font-family: 'Lora', serif;
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-menu a i {
+            margin-right: 8px;
+            font-size: 1.1em;
+            color: #007bff;
+        }
+
+        .navbar-menu a:hover {
+            color: #007bff;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 640px; /* Adjusted to a standard height */
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 2px solid black;
+        }
+
+        .dot.active {
+            background-color: white;
+        }
+
+        .mvv-section {
+            padding: 60px 5%;
+            background-color: white;
+            flex-grow: 1;
+        }
+
+        .mvv-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mvv-card {
+            flex: 1;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .mvv-card h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-family: 'Lora', serif;
+        }
+
+        .mvv-card p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+
+        @media screen and (max-width: 1300px) {
+    .carousel {
+        height: 480px; /* Adjusted height for laptop screens */
+    }
+
+    .carousel-caption h2 {
+        font-size: 1.8em; /* Smaller text size for captions */
+    }
+
+    .carousel-caption p {
+        font-size: 1em;
+    }
+}
+
+        @media screen and (max-width: 768px) {
+            .mvv-container {
+                flex-direction: column;
+            }
+            
+            .carousel {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{% static 'lotus.png' %}" alt="AERC Logo">
+            <h1>Sigunya Cleaning Services</h1>
+        </div>
+        
+        <div class="navbar-menu">
+            <a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a>
+            <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i>About Us</a>
+            <a href="{% url 'services' %}"><i class="fas fa-cogs"></i>Services</a>
+            <a href="{% url 'careers' %}"><i class="fas fa-briefcase"></i>Careers</a>
+            <a href="{% url 'contact' %}"><i class="fas fa-envelope"></i>Contact</a>
+            <a href="{% url 'media' %}"><i class="fas fa-video"></i>Media</a>
+        </div>
+    </nav>
+
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-slide active" style="background-image: url('{% static "job8.jpeg" %}')">
+                <div class="carousel-caption">
+                    <h2>Welcome to Sigunya Cleaning Services</h2>
+                    <p>Eco-Clean, Every Time</p>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('{% static "job9.jpeg" %}')">
+                <div class="carousel-caption">
+                    <h2>Professional Services</h2>
+                    <p>Comprehensive Cleaning Solutions</p>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('{% static "job6.jpeg" %}')">
+                <div class="carousel-caption">
+                    <h2>Join Our Team</h2>
+                    <p>Be part of groundbreaking discoveries</p>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('{% static "job10.jpeg" %}')">
+                <div class="carousel-caption">
+                    <h2></h2>
+                    <p>With a focus on excellence and attention to detail, we aim to create sound and pristine enviroments for living and working</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active" onclick="showSlide(0)"></span>
+            <span class="dot" onclick="showSlide(1)"></span>
+            <span class="dot" onclick="showSlide(2)"></span>
+            <span class="dot" onclick="showSlide(3)"></span>
+        </div>
+    </div>
+
+    <section class="mvv-section">
+        <div class="mvv-container">
+            <div class="mvv-card">
+                <h3>Our Mission</h3>
+                <p>To assist clients in achieving a hygienic environment through cost-effective, high-quality cleaning and hygiene services.</p>
+            </div>
+            
+            <div class="mvv-card">
+                <h3>Our Vision</h3>
+                <p>To be a leading cleaning and hygiene service provider with a solid footprint built on trust, quality, and reliability.</p>
+            </div>
+            
+            <div class="mvv-card">
+                <h3>Our Values</h3>
+<p>
+    Our values define our business, and we ascribe to the concept of 
+    <em>"Life is a journey, enjoy the TRIP"</em><br>
+    <span style="font-size: 1.5em; font-weight: bold;">T</span>eamwork<br>
+    <span style="font-size: 1.5em; font-weight: bold;">R</span>espect<br>
+    <span style="font-size: 1.5em; font-weight: bold;">I</span>ntegrity<br>
+    <span style="font-size: 1.5em; font-weight: bold;">P</span>rofessional
+</p>
+
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+<footer style="background-color: #f4f4f4; padding: 40px 5%; text-align: center;  margin-top: 20px;">
+    <div class="logo" style="margin-bottom: 20px;">
+        <img src="{% static 'lotus.png' %}" alt="Sigunya Logo" style="width: 50px; height: 50px; margin-bottom: 10px;">
+        <h1 style="font-family: 'Lora', serif; font-size: 1.5em; color: #333; margin: 0;">Sigunya Cleaning Services</h1>
+    </div>
+
+    <!-- Social icons -->
+    <div class="social-icons" style="margin-bottom: 20px;">
+        <a href="https://facebook.com" target="_blank" title="Facebook" style="margin: 0 10px; color: #333;">
+            <i class="fab fa-facebook" style="font-size: 1.5em;"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" title="Twitter" style="margin: 0 10px; color: #333;">
+            <i class="fab fa-twitter" style="font-size: 1.5em;"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn" style="margin: 0 10px; color: #333;">
+            <i class="fab fa-linkedin" style="font-size: 1.5em;"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram" style="margin: 0 10px; color: #333;">
+            <i class="fab fa-instagram" style="font-size: 1.5em;"></i>
+        </a>
+    </div>
+
+    <p style="color: #777; font-size: 0.9em;">
+        &copy; {{ current_year }} Sigunya Cleaning Services. All Rights Reserved.
+    </p>
+</footer>
+
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
+

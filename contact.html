@@ -1,0 +1,532 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Sigunya Cleaning Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'lotus.png' %}" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .navbar-brand h1 {
+            font-family: 'Lora', serif;
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-menu a i {
+            margin-right: 8px;
+            font-size: 1.1em;
+            color: #007bff;
+        }
+
+        .navbar-menu a:hover {
+            color: #007bff;
+        }
+
+        .page-banner {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{% static "call.jpeg" %}');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .banner-content {
+            text-align: center;
+        }
+
+        .banner-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .contact-container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 5%;
+            flex: 1;
+        }
+
+        .contact-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .contact-detail {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-detail i {
+            margin-right: 10px;
+            color: #007bff;
+            width: 20px;
+        }
+
+        .ratings-section {
+            width: 100%;
+            background: white;
+            padding: 40px 5%;
+            margin: 40px 0;
+        }
+
+        .ratings-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        .rating-cards {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .rating-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: #ffd700;
+            margin: 10px 0;
+        }
+
+        .rating-card p {
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .rating-card small {
+            color: #666;
+        }
+
+        .gallery-section {
+            width: 100%;
+            padding: 40px 5%;
+        }
+
+        gallery-section {
+    width: 100%;
+    padding: 60px 5%; /* Increased padding */
+    background-color: #fff; /* Added background color for separation */
+    margin: 40px 0;
+}
+
+.gallery-section h2 {
+    text-align: center;
+    margin-bottom: 40px; /* Increased margin */
+    color: #007bff;
+}
+
+.gallery-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider columns */
+    gap: 30px; /* Increased gap between items */
+    margin-top: 30px;
+    padding: 20px; /* Added padding around the grid */
+}
+
+.gallery-item {
+    height: 400px;
+    background-color: #ddd;
+    border-radius: 12px; /* Increased border radius */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Enhanced shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+        footer {
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 40px 5%;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .social-icons {
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .social-icons i {
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover i {
+            color: #007bff;
+        }
+
+        /* Responsive adjustment */
+@media (max-width: 768px) {
+    .gallery-grid {
+        gap: 20px;
+        padding: 10px;
+    }
+    
+    .gallery-item {
+        height: 300px; /* Shorter height on mobile */
+    }
+}
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .navbar-brand {
+                margin-bottom: 10px;
+            }
+
+            .navbar-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar-menu a {
+                margin: 5px 10px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-banner {
+                height: 200px;
+            }
+
+            .banner-content h1 {
+                font-size: 2em;
+            }
+
+            .contact-container {
+                padding: 0 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{% static 'lotus.png' %}" alt="Sigunya Logo">
+            <h1>Sigunya Cleaning Services</h1>
+        </div>
+        <div class="navbar-menu">
+            <a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a>
+            <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i>About Us</a>
+            <a href="{% url 'services' %}"><i class="fas fa-cogs"></i>Services</a>
+            <a href="{% url 'careers' %}"><i class="fas fa-briefcase"></i>Careers</a>
+            <a href="{% url 'contact' %}"><i class="fas fa-envelope"></i>Contact</a>
+            <a href="{% url 'media' %}"><i class="fas fa-video"></i>Media</a>
+        </div>
+    </nav>
+
+    <!-- Page Banner -->
+    <div class="page-banner">
+        <div class="banner-content">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our friendly team</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="contact-container">
+        <!-- Contact Grid -->
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2>Send us a message</h2>
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="quote">Request a Quote</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="support">Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>P.O Box 30812-00100, Nairobi, Kenya</span>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-phone"></i>
+                    <span>+254 786 912 020</span>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@sigunyacleaning.com</span>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-clock"></i>
+                    <span>Mon - Fri: 8:00 AM - 6:00 PM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ratings Section -->
+        <div class="ratings-section">
+            <h2>What Our Clients Say</h2>
+            <div class="rating-cards">
+                <div class="rating-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Excellent service! Very professional team."</p>
+                    <small>- Sarah M.</small>
+                </div>
+                <div class="rating-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Reliable and thorough cleaning service."</p>
+                    <small>- John D.</small>
+                </div>
+                <div class="rating-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Best cleaning service in Nairobi!"</p>
+                    <small>- Mary W.</small>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <!-- Footer from base template -->
+    <footer style="background-color: #f4f4f4; padding: 40px 5%; text-align: center; margin-top: 20px;">
+        <div class="logo" style="margin-bottom: 20px;">
+            <img src="{% static 'lotus.png' %}" alt="Sigunya Logo" style="width: 50px; height: 50px; margin-bottom: 10px;">
+            <h1 style="font-family: 'Lora', serif; font-size: 1.5em; color: #333; margin: 0;">Sigunya Cleaning Services</h1>
+        </div>
+
+        <div class="social-icons" style="margin-bottom: 20px;">
+            <a href="https://facebook.com" target="_blank" title="Facebook" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-facebook" style="font-size: 1.5em;"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" title="Twitter" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-twitter" style="font-size: 1.5em;"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" title="LinkedIn" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-linkedin" style="font-size: 1.5em;"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" title="Instagram" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-instagram" style="font-size: 1.5em;"></i>
+            </a>
+        </div>
+
+        <p style="color: #777; font-size: 0.9em;">
+            &copy; {{ current_year }} Sigunya Cleaning Services. All Rights Reserved.
+        </p>
+    </footer>
+</body>
+</html>

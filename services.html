@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECO CLEAN</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'lotus.png' %}" type="image/x-icon">
+    <style>
+        /* [Previous styles remain the same until .service-list] */
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .navbar-brand h1 {
+            font-family: 'Lora', serif;
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-menu a i {
+            margin-right: 8px;
+            font-size: 1.1em;
+            color: #007bff;
+        }
+
+        .navbar-menu a:hover {
+            color: #007bff;
+        }
+
+        /* Services Section Styles */
+        .services-section {
+            padding: 80px 5%;
+            background: linear-gradient(to bottom, #ffffff, #f4f7f6);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .services-header h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-family: 'Lora', serif;
+            color: #007bff;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-card h3 i {
+            font-size: 1.2em;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            margin: 15px 0;
+            padding-left: 35px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-list li i {
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+
+        .payment-card {
+            background: green;
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .payment-card h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .payment-card h3 i {
+            font-size: 1.2em;
+        }
+
+        .payment-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .payment-details p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* [Rest of the previous styles remain the same] */
+        @media (max-width: 768px) {
+            .services-section {
+                padding: 40px 5%;
+            }
+
+            .services-header h2 {
+                font-size: 2em;
+            }
+
+            .navbar {
+                flex-direction: column;
+                padding: 10px 5%;
+            }
+
+            .navbar-menu {
+                margin-top: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar-menu a {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- [Navigation remains the same] -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{% static 'lotus.png' %}" alt="AERC Logo">
+            <h1>Sigunya Cleaning Services</h1>
+        </div>
+        
+        <div class="navbar-menu">
+            <a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a>
+            <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i>About Us</a>
+            <a href="{% url 'services' %}"><i class="fas fa-cogs"></i>Services</a>
+            <a href="{% url 'careers' %}"><i class="fas fa-briefcase"></i>Careers</a>
+            <a href="{% url 'contact' %}"><i class="fas fa-envelope"></i>Contact</a>
+            <a href="{% url 'media' %}"><i class="fas fa-video"></i>Media</a>
+        </div>
+    </nav>
+
+    <section id="services" class="services-section">
+        <div class="services-header">
+            <h2>Our Services</h2>
+        </div>
+
+        <div class="services-grid">
+            <!-- Domestic Services Card -->
+            <div class="service-card">
+                <h3><i class="fas fa-home"></i>Domestic Services</h3>
+                <ul class="service-list">
+                    <li><i class="fas fa-spray-can"></i>Pressure washing (exterior facades)</li>
+                    <li><i class="fas fa-window-maximize"></i>Window cleaning</li>
+                    <li><i class="fas fa-paint-roller"></i>Painting and light maintenance</li>
+                    <li><i class="fas fa-broom"></i>Deep carpet and upholstery cleaning</li>
+                    <li><i class="fas fa-couch"></i>Sofas Cleaning</li>
+                    <li><i class="fas fa-sink"></i>Ablution and kitchen steam cleaning</li>
+                    <li><i class="fas fa-bug"></i>Fumigation and Pest control services</li>
+                    <li><i class="fas fa-spray-can-sparkles"></i>Disinfecting fogging</li>
+                </ul>
+            </div>
+
+            <!-- Commercial Services Card -->
+            <div class="service-card">
+                <h3><i class="fas fa-building"></i>Commercial Services</h3>
+                <ul class="service-list">
+                    <li><i class="fas fa-briefcase"></i>General Office Cleaning</li>
+                    <li><i class="fas fa-window-restore"></i>High-rise window cleaning</li>
+                    <li><i class="fas fa-bug"></i>Fumigation and Pest control services</li>
+                    <li><i class="fas fa-spray-can-sparkles"></i>Disinfecting fogging</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Payment Details Card -->
+        <div class="payment-card">
+            <h3><i class="fas fa-mobile-alt"></i>Payment Details</h3>
+            <div class="payment-details">
+                <p><strong><i class="fas fa-money-bill-wave"></i> M-Pesa Pay Bill</strong></p>
+                <p>Business Number: 4096483</p>
+                <p>Account Number: 140319M</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #f4f4f4; padding: 40px 5%; text-align: center; margin-top: 20px;">
+        <div class="logo" style="margin-bottom: 20px;">
+            <img src="{% static 'lotus.png' %}" alt="Sigunya Logo" style="width: 50px; height: 50px; margin-bottom: 10px;">
+            <h1 style="font-family: 'Lora', serif; font-size: 1.5em; color: #333; margin: 0;">Sigunya Cleaning Services</h1>
+        </div>
+
+        <!-- Social icons -->
+        <div class="social-icons" style="margin-bottom: 20px;">
+            <a href="https://facebook.com" target="_blank" title="Facebook" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-facebook" style="font-size: 1.5em;"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" title="Twitter" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-twitter" style="font-size: 1.5em;"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" title="LinkedIn" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-linkedin" style="font-size: 1.5em;"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" title="Instagram" style="margin: 0 10px; color: #333;">
+                <i class="fab fa-instagram" style="font-size: 1.5em;"></i>
+            </a>
+        </div>
+
+        <p style="color: #777; font-size: 0.9em;">
+            &copy; {{ current_year }} Sigunya Cleaning Services. All Rights Reserved.
+        </p>
+    </footer>
+</body>
+</html>
